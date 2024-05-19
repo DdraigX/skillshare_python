@@ -7,15 +7,15 @@ inputUrl = "http://www.google.com"
 #dictionary 
 crawledWebLink = {}
 
-while inputUrl != '':
+while inputUrl is not None:
     try: 
-        inputUrl = input("Please enter a url to parse\n")
+        inputUrl = input("Please enter a url to parse \n")
         if inputUrl == "": 
             print("exiting loop")
             break
         
         
-        urlName = input("Enter url name" + inputUrl + "\n")
+        urlName = input("Enter url name " + inputUrl + " \n")
         webfile = urllib.request.urlopen(inputUrl).read()  #don't think this is going to work
         
         
