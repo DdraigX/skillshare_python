@@ -6,6 +6,7 @@ import os
 import csv
 import time 
 import datetime
+import xlsxwriter
 
 # getdate = datetime.datetime.now()
 # threemonth = getdate - datetime.timedelta(months=3)
@@ -95,4 +96,35 @@ with open(openFile,'r') as csvfile:
         
 #print(str(len(listoflists)))
 
+listoflistsSortedbyDate = sorted(listoflists, key=lambda x:x[0], reverse=True)
 
+#print(listoflistsSortedbyDate)
+
+
+# for row in listoflistsSortedbyDate:
+#         date = row[0]
+#         openprice = row[1]
+#         highprice = row[2]
+#         lowprice = row[3]
+#         closeprice = row[4]
+#         volume = row[6]
+#         pctChange = float(closeprice)/float(openprice) - 1
+#         oneResultrow = [date, openprice, highprice, lowprice, closeprice, pctChange,float(volume)]
+#         listoflists.append(oneResultrow)
+
+#         print(date, " Open: " + " {:,.1f}".format(float(openprice)) + " Close: " + " {:,.1f}".format(float(closeprice)) + " {:,.1f}".format(float(volume)/1e6) + "M ", " {:,.1f}".format(pctChange*100)+"%")
+
+
+excelFile = localpath + "btcusd.xlsx"
+
+workbook = xlsxwriter.Workbook(excelFile)
+
+worksheet = workbook.add_worksheet("Summary")
+
+worksheet.write_row("A1",["BTC Three month historical prices"])
+worksheet.write_row("A2",["Date","Open","High","Low","Close","Percent","Volume"])
+
+for rowNum in range(5):
+    oneRowToWrite = listoflistsSortedbyDate[rowNum]
+    worksheet.write_row("A" + str(rowNum + 3), oneRowToWrite)
+workbook.close()
