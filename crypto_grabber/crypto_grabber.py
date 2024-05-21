@@ -8,6 +8,12 @@ import time
 import datetime
 import xlsxwriter
 
+#TODO Add other crypto assets
+#Calculate Trend
+#Push to trend to display.
+
+
+
 # getdate = datetime.datetime.now()
 # threemonth = getdate - datetime.timedelta(months=3)
 # threemonthunixtime = 
