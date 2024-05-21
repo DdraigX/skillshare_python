@@ -55,7 +55,7 @@ hdr
 # Make the web request - just use a web browser like Mozilla or Chrome would
 # This is where the strange boilerplate code that we just typed out comes in handy
 webRequest = urllib.request.Request(urlOfFileName,headers=hdr)
-
+e = ""
 # Doing stuff with files is quite error-prone, so let's be careful and 
 # use try/except as safety nets
 try:
@@ -77,6 +77,7 @@ try:
     # be written to file.
     output.close()
     # 3. The barrel (i.e. the file) is closed, sealed shut
+    
 except(urllib.request.HTTPError, e):
     # we are now in the 'except' portion of the try/except block. This
     # code will be executed only if an exception is thrown in the try block
