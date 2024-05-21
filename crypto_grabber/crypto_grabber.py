@@ -130,7 +130,8 @@ worksheet = workbook.add_worksheet("Summary")
 worksheet.write_row("A1",["BTC Three month historical prices"])
 worksheet.write_row("A2",["Date","Open","High","Low","Close","Percent","Volume"])
 
-for rowNum in range(5):
+rowcount = len(listoflistsSortedbyDate)
+for rowNum in range(rowcount):
     oneRowToWrite = listoflistsSortedbyDate[rowNum]
     worksheet.write_row("A" + str(rowNum + 3), oneRowToWrite)
 workbook.close()
