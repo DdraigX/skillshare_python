@@ -12,7 +12,10 @@ import xlsxwriter
 #Calculate Trend
 #Push to trend to display.
 
-
+utsnow = int(datetime.datetime.now().timestamp())
+dt = datetime.datetime.now()
+dttma = dt - datetime.timedelta(days=90)
+utstma = int(dttma.timestamp())
 
 # getdate = datetime.datetime.now()
 # threemonth = getdate - datetime.timedelta(months=3)
@@ -22,7 +25,8 @@ import xlsxwriter
 # print(threemonth + "\n")
 # print(unixtimestamp)
 
-urlFilename = "https://query1.finance.yahoo.com/v7/finance/download/BTC-USD?period1=1708532979&period2=1716297086&interval=1d&events=history&includeAdjustedClose=true"
+urlFilename = "https://query1.finance.yahoo.com/v7/finance/download/BTC-USD?period1=" + str(utstma) + "&period2=" + str(utsnow) + "&interval=1d&events=history&includeAdjustedClose=true"
+print(urlFilename)
 e = ""
 pathTocsv = "/home/pi/pidev/skillshare_python/crypto_grabber/BTC-USD.csv"
 
@@ -135,3 +139,6 @@ for rowNum in range(rowcount):
     oneRowToWrite = listoflistsSortedbyDate[rowNum]
     worksheet.write_row("A" + str(rowNum + 3), oneRowToWrite)
 workbook.close()
+
+print(utsnow) 
+print(utstma)
