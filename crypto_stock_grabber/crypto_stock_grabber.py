@@ -12,9 +12,12 @@ import xlsxwriter
 #Calculate Trend
 #Push to trend to display.
 
+ticker = input("Please enter a ticker symbol: ")
+trange = input("For how many days: ")
+
 utsnow = int(datetime.datetime.now().timestamp())
 dt = datetime.datetime.now()
-dttma = dt - datetime.timedelta(days=90)
+dttma = dt - datetime.timedelta(days=trange)
 utstma = int(dttma.timestamp())
 
 # getdate = datetime.datetime.now()
@@ -25,10 +28,12 @@ utstma = int(dttma.timestamp())
 # print(threemonth + "\n")
 # print(unixtimestamp)
 
-urlFilename = "https://query1.finance.yahoo.com/v7/finance/download/BTC-USD?period1=" + str(utstma) + "&period2=" + str(utsnow) + "&interval=1d&events=history&includeAdjustedClose=true"
+
+
+urlFilename = "https://query1.finance.yahoo.com/v7/finance/download/" + str(ticker) + "?period1=" + str(utstma) + "&period2=" + str(utsnow) + "&interval=1d&events=history&includeAdjustedClose=true"
 print(urlFilename)
 e = ""
-pathTocsv = "/home/pi/pidev/skillshare_python/crypto_grabber/BTC-USD.csv"
+pathTocsv = "/home/pi/pidev/skillshare_python/crypto_grabber/" + str(ticker) + ".csv"
 
 hdr = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
       'Accept': 'text/html, application/xhtml+xml,application/xml;q=0.9,*/*q=0.8',
@@ -125,13 +130,13 @@ listoflistsSortedbyDate = sorted(listoflists, key=lambda x:x[0], reverse=True)
 #         print(date, " Open: " + " {:,.1f}".format(float(openprice)) + " Close: " + " {:,.1f}".format(float(closeprice)) + " {:,.1f}".format(float(volume)/1e6) + "M ", " {:,.1f}".format(pctChange*100)+"%")
 
 
-excelFile = localpath + "btcusd.xlsx"
+excelFile = localpath + str(ticker) + ".xlsx"
 
 workbook = xlsxwriter.Workbook(excelFile)
 
 worksheet = workbook.add_worksheet("Summary")
 
-worksheet.write_row("A1",["BTC Three month historical prices"])
+worksheet.write_row("A1",[str(ticker) + "Three month historical prices"])
 worksheet.write_row("A2",["Date","Open","High","Low","Close","Percent","Volume"])
 
 rowcount = len(listoflistsSortedbyDate)
